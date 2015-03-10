@@ -1,7 +1,11 @@
 defmodule Charts.DataChannel do
   use Phoenix.Channel
 
+  require IEx
+
   def join("data:source", _message, socket) do
+    IO.puts "JOIN"
+    IO.puts(inspect socket)
     reply socket, "join", %{ hey: "Hello!" }
     {:ok, socket}
   end
@@ -13,6 +17,7 @@ defmodule Charts.DataChannel do
 
   def handle_in("new:msg", message, socket) do
     IO.puts "HANDLE_IN"
+
     broadcast socket, "new:msg", message
     {:ok, socket}
   end
