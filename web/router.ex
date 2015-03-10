@@ -18,10 +18,18 @@ defmodule Charts.Router do
     get "/", PageController, :index
   end
 
+  scope "/:username", Charts do
+    pipe_through :browser # Use the default browser stack
+
+    resources "/line_charts", LineChartsController
+  end
+
+
   #Other scopes may use custom stacks.
-  scope "/", Charts do
+  scope "/api", Charts do
     pipe_through :api
-    post "/data", DataController, :create
+
+    post "/line_charts/:id/data", API.LineChartController, :data
   end
 
   socket "/ws", Charts do
