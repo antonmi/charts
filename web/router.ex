@@ -16,12 +16,16 @@ defmodule Charts.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/users", UsersController, only: [:new, :create]
+    get "/users/login", UsersController, :login
+    get "/users/:id/logout", UsersController, :logout
+    post "/user/process_login", UsersController, :process_login
   end
 
   scope "/:username", Charts do
     pipe_through :browser # Use the default browser stack
 
-    resources "/line_charts", LineChartsController
+    resources "/charts/:type", ChartsController
   end
 
 

@@ -7,13 +7,9 @@ defmodule Charts.UserRepo do
     if exist?(username), do: false, else: Charts.Repo.insert(user)
   end
 
-  #find_by_username and etc
-  
-  ["username"] |> Enum.each fn(attr) ->
-    def unquote(String.to_atom("find_by_#{attr}"))(value) do
-      query = from u in Charts.User, where: u.username == ^value, select: u
-      Charts.Repo.all(query) |> List.first
-    end
+  def find_by_username(name) do
+    query = from u in Charts.User, where: u.username == ^name, select: u
+    Charts.Repo.all(query) |> List.first
   end
 
   def exist?(username) do

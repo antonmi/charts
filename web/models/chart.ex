@@ -1,4 +1,4 @@
-defmodule Charts.Charts do
+defmodule Charts.Chart do
   use Ecto.Model
 
   schema "charts" do
