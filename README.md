@@ -1,8 +1,7 @@
 # Charts
 
-To start your new Phoenix application:
+In development!
 
-1. Install dependencies with `mix deps.get`
-2. Start Phoenix endpoint with `mix phoenix.server`
+Service for data visualization
 
-Now you can visit `localhost:4000` from your browser.
+Push your data and enjoy the charts
