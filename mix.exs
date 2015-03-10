@@ -15,7 +15,7 @@ defmodule Charts.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Charts, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :cowboy, :logger, :httpotion, :poison]]
   end
 
   # Specifies your project dependencies
@@ -23,6 +23,9 @@ defmodule Charts.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, "~> 0.9.0"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
+     {:httpotion, "~> 2.0.0"},
+     {:poison, "~> 1.3.1"}]
   end
 end
