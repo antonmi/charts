@@ -6,4 +6,6 @@ defmodule Charts.ChartRepo do
     Charts.Repo.insert(chart)
   end
 
+  
+
 end

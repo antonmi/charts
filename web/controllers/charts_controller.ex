@@ -11,4 +11,7 @@ defmodule Charts.ChartsController do
     render conn, "show.html", chart: chart
   end
 
+  def data(conn, params) do
+    
+  end
 end

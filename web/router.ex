@@ -22,6 +22,15 @@ defmodule Charts.Router do
     post "/user/process_login", UsersController, :process_login
   end
 
+  #Other scopes may use custom stacks.
+  scope "/api/", Charts do
+    pipe_through :api
+
+    get "/charts/:id", API.ChartsController, :show
+    post "/charts/:id/data", API.LineChartController, :data
+  end
+  
+
   scope "/:username", Charts do
     pipe_through :browser # Use the default browser stack
 
@@ -29,12 +38,7 @@ defmodule Charts.Router do
   end
 
 
-  #Other scopes may use custom stacks.
-  scope "/api", Charts do
-    pipe_through :api
 
-    post "/line_charts/:id/data", API.LineChartController, :data
-  end
 
   socket "/ws", Charts do
     channel "data:*", DataChannel

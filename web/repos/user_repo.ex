@@ -13,7 +13,7 @@ defmodule Charts.UserRepo do
   end
 
   def exist?(username) do
-    if find_by_username(username), do: false, else: true
+    if find_by_username(username), do: true, else: false
   end
 
 end

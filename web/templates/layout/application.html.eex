@@ -12,8 +12,16 @@
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
     <script type="text/javascript" src="/js/phoenix.js"></script>
-    <script type="text/javascript" src="/js/test.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
 
+    <script type="text/javascript"
+             src="https://www.google.com/jsapi?autoload={
+               'modules':[{
+                 'name':'visualization',
+                 'version':'1',
+                 'packages':['corechart']
+               }]
+             }"></script>
 
     <title>Hello Phoenix!</title>
 
@@ -46,8 +54,8 @@
         <!-- Jumbotron -->
         <div class="jumbotron">
           <!-- <h1>Marketing stuff!</h1> -->
-          <div id="curve_chart"></div>
-          <%#= @inner %>
+
+          <%= @inner %>
           <!-- <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p> -->
           <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
         </div>
