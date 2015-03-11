@@ -9,3 +9,5 @@ class window.APIClient
 
   data: ->
     'ok'
+
+# coffee -j js/app.js -cw coffee/*.coffee
