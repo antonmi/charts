@@ -16,4 +16,12 @@ defmodule Charts.API.ChartsController do
     json conn, %{data: chart.data}
   end
 
+  def data(conn, params) do
+    chart = Charts.ChartRepo.find(params["id"])
+    chart = %{chart | data: params["data"]}
+    Charts.Repo.update(chart)
+    Phoenix.Channel.broadcast_from(Charts.PubSub, self, "data:source", "update", %{})
+    json conn, %{}
+  end
+
 end

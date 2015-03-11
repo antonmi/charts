@@ -27,9 +27,9 @@ defmodule Charts.Router do
     pipe_through :api
 
     get "/charts/:id", API.ChartsController, :show
-    post "/charts/:id/data", API.LineChartController, :data
+    post "/charts/:id/data", API.ChartsController, :data
   end
-  
+
 
   scope "/:username", Charts do
     pipe_through :browser # Use the default browser stack

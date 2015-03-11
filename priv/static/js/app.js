@@ -8,21 +8,16 @@
 
     function APIClient(url) {
       this.url = url;
-      this.draw_chart = __bind(this.draw_chart, this);
-
       console.log(this.url);
       $.getJSON(this.url, {
         "format": "json"
       }, this.draw_chart);
     }
 
-    APIClient.prototype.draw_chart = function(data) {
-      data = JSON.parse(data['data']);
-      return window.chart.draw(data);
-    };
-
-    APIClient.prototype.data = function() {
-      return 'ok';
+    APIClient.prototype.get_data = function(callback) {
+      return $.getJSON(this.url, {
+        "format": "json"
+      }, callback);
     };
 
     return APIClient;
@@ -34,14 +29,27 @@
     function BaseChart(chart_div_id) {
       var url;
       this.chart_div_id = chart_div_id;
+      this.draw_chart = __bind(this.draw_chart, this);
+
       this.$chart_div = $("#" + this.chart_div_id);
       url = this.$chart_div.attr('data-url');
       this.api_client = new window.APIClient(url);
+      this.ws_client = new window.WSClient(this);
       this.init();
+      this.update();
     }
 
     BaseChart.prototype.init = function() {
       throw "Override me!";
+    };
+
+    BaseChart.prototype.update = function() {
+      return this.api_client.get_data(this.draw_chart);
+    };
+
+    BaseChart.prototype.draw_chart = function(data) {
+      data = JSON.parse(data['data']);
+      return this.draw(data);
     };
 
     return BaseChart;
@@ -76,5 +84,35 @@
     return LineChart;
 
   })(window.BaseChart);
+
+  window.WSClient = (function() {
+
+    function WSClient(chart) {
+      var url;
+      this.chart = chart;
+      url = "ws://" + location.host + "/ws";
+      this.socket = new Phoenix.Socket(url);
+      this.init();
+    }
+
+    WSClient.prototype.init = function() {
+      var _this = this;
+      return this.socket.join("data:source", {}, function(channel) {
+        window.chan = channel;
+        channel.on("join", function(message) {
+          console.log("joined");
+          return console.log(message);
+        });
+        return channel.on("update", function(message) {
+          console.log("update");
+          _this.chart.update();
+          return console.log(message);
+        });
+      });
+    };
+
+    return WSClient;
+
+  })();
 
 }).call(this);

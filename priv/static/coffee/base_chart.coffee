@@ -3,7 +3,16 @@ class window.BaseChart
     @$chart_div = $("##{@chart_div_id}")
     url = @$chart_div.attr('data-url')
     @api_client = new window.APIClient(url)
+    @ws_client = new window.WSClient(@)
     @init()
+    @update()
 
   init: ->
     throw "Override me!"
+
+  update: ->
+    @api_client.get_data(@draw_chart)
+
+  draw_chart: (data) =>
+    data = JSON.parse(data['data'])
+    @draw(data)

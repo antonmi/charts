@@ -1,8 +1,8 @@
 <h1>Hey</h1>
-<div id="line-chart" data-url="/api/charts/<%= @chart.id %>"></div>
+<div id="chart-div" data-url="/api/charts/<%= @chart.id %>"></div>
 
 <script type="text/javascript">
 $(function(){
-  window.chart = new LineChart('line-chart')
+  window.chart = new LineChart('chart-div')
 });
 </script>
