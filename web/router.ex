@@ -23,7 +23,7 @@ defmodule Charts.Router do
   end
 
   #Other scopes may use custom stacks.
-  scope "/api/", Charts do
+  scope "/api", Charts, as: :api do
     pipe_through :api
 
     get "/charts/:id", API.ChartsController, :show
@@ -34,7 +34,7 @@ defmodule Charts.Router do
   scope "/:user_id", Charts do
     pipe_through :browser # Use the default browser stack
     get "/dashboard", UsersController, :dashboard
-    resources "/charts/:type", ChartsController
+    resources "/charts", ChartsController
   end
 
 

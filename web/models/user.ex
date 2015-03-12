@@ -1,5 +1,5 @@
 defmodule Charts.User do
-  use Ecto.Model
+  use Charts.BaseModel
   alias Charts.UserRepo
 
   schema "users" do
@@ -21,12 +21,8 @@ defmodule Charts.User do
     set
   end
 
-  def full_error_message(changeset) do
-    Enum.map(changeset.errors, &Charts.User.error_message(&1)) |> Enum.join("\n")
-  end
-
   def error_message({:password, :too_short}), do: "Password too short!"
   def error_message({:password, :mishmatch}), do: "Password and confirmation mishmatch!"
   def error_message({:username, :unique}), do: "User already exists!"
-
+  def error_message(_), do: "Some error"
 end

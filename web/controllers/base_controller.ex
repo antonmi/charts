@@ -4,13 +4,18 @@ defmodule Charts.BaseController do
     quote do
       use Phoenix.Controller
       import Charts.Router.Helpers
-
       require IEx
-
+      
+      plug :set_current_user
 
       def current_user(conn) do
+        conn.assigns[:current_user]
+      end
+
+      defp set_current_user(conn, _params) do
         user_id = get_session(conn, :user_id)
         user = user_id && Charts.Repo.get(Charts.User, user_id)
+        if user, do: assign(conn, :current_user, user), else: conn
       end
 
       defp auth(conn, params) do

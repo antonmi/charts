@@ -2,20 +2,20 @@
 
   <div class="col-lg-8 col-lg-offset-2">
     <form class="form-horizontal" action="<%= users_path(@conn, :create) %>" method="post">
-      <div class="form-group <%= if has_error?(@user_changeset, :username), do: "has-error" %>">
-        <label for="inputEmail3" class="col-sm-2 control-label">Login</label>
+      <div class="form-group <%= if has_error?(@changeset, :username), do: "has-error" %>">
+        <label for="loginInput" class="col-sm-2 control-label">Login</label>
         <div class="col-sm-10">
           <input class="form-control" name="username" placeholder="Login" id="loginInput">
         </div>
       </div>
-      <div class="form-group <%= if has_error?(@user_changeset, :password), do: "has-error" %>">
+      <div class="form-group <%= if has_error?(@changeset, :password), do: "has-error" %>">
         <label for="passwordInput" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
           <input type="password" name="password" class="form-control" placeholder="Password" id="passwordInput">
         </div>
       </div>
 
-      <div class="form-group <%= if has_error?(@user_changeset, :password), do: "has-error" %>">
+      <div class="form-group <%= if has_error?(@changeset, :password), do: "has-error" %>">
         <label for="confirmInput" class="col-sm-2 control-label">Confirm</label>
         <div class="col-sm-10">
           <input type="password" name="confirm" class="form-control" id="confirmInput" placeholder="Confirm">

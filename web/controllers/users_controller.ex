@@ -9,7 +9,7 @@ defmodule Charts.UsersController do
   end
 
   def new(conn, _params) do
-    render conn, "new.html", user_changeset: %Ecto.Changeset{}
+    render conn, "new.html", changeset: %Ecto.Changeset{}
   end
 
   def create(conn, params) do
@@ -20,12 +20,12 @@ defmodule Charts.UsersController do
       |> redirect to: users_path(conn, :dashboard, user.id)
     else
       conn |> put_flash(:error, Charts.User.full_error_message(changeset))
-      |> render "new.html", user_changeset: changeset
+      |> render "new.html", changeset: changeset
     end
   end
 
   def login(conn, _params) do
-    render conn, "login.html", user_changeset: %Ecto.Changeset{}
+    render conn, "login.html", changeset: %Ecto.Changeset{}
   end
 
   def process_login(conn, params) do

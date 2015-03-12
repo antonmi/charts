@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-1">
+    <h1>New Chart</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-1">
+    <form class="form-horizontal" action="<%= charts_path(@conn, :create, current_user(@conn).id) %>" method="post">
+      <div class="form-group <%= if has_error?(@changeset, :username), do: "has-error" %>">
+        <label for="titleInput" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input class="form-control" name="title" value="<%= @changeset.changes[:title] %>" placeholder="Title" id="titleInput">
+        </div>
+      </div>
+      <div class="form-group <%= if has_error?(@changeset, :password), do: "has-error" %>">
+        <label for="typeSelect" class="col-sm-2 control-label">Type</label>
+
+        <div class="col-sm-10">
+          <select class="form-control" name="type" id="typeSelect" value="<%=  %>">
+            <option>Select Type</option>
+            <%= for type <- Charts.Chart.types() do %>
+              <% {value, text} = type %>
+              <%= if Atom.to_string(value) == @changeset.changes[:type] do %>
+              <option selected value=<%= value %>><%= text %></option>
+              <% else %>
+              <option value=<%= value %>><%= text %></option>
+              <% end %>
+            <% end %>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Create</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
