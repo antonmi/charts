@@ -39,9 +39,9 @@
       this.update();
     }
 
-    BaseChart.prototype.init = function() {
-      throw "Override me!";
-    };
+    BaseChart.prototype.init = function() {};
+
+    BaseChart.prototype.draw = function() {};
 
     BaseChart.prototype.update = function() {
       return this.api_client.get_data(this.draw_chart);

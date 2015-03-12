@@ -4,7 +4,13 @@ defmodule Charts.UserRepo do
   def create(username, password) do
     passhash = Charts.Crypto.md5(password)
     user = %Charts.User{username: username, passhash: passhash}
-    if exist?(username), do: false, else: Charts.Repo.insert(user)
+    Charts.Repo.insert(user)
+  end
+
+  def set_password(user, password) do
+    passhash = Charts.Crypto.md5(password)
+    user = %Charts.User{user | passhash: passhash}
+    Charts.Repo.update(user)
   end
 
   def find_by_username(name) do

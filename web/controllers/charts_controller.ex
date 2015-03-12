@@ -3,6 +3,7 @@ defmodule Charts.ChartsController do
 
   @chart_type "line_chart"
 
+  plug :auth
   plug :action
 
 
@@ -11,5 +12,5 @@ defmodule Charts.ChartsController do
     render conn, "show.html", chart: chart
   end
 
-  
+
 end

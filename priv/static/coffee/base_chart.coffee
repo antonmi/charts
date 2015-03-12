@@ -1,3 +1,4 @@
+# coffee -j js/app.js -cw coffee/*.coffee
 class window.BaseChart
   constructor: (@chart_div_id) ->
     @$chart_div = $("##{@chart_div_id}")
@@ -8,7 +9,7 @@ class window.BaseChart
     @update()
 
   init: ->
-    throw "Override me!"
+  draw: ->
 
   update: ->
     @api_client.get_data(@draw_chart)

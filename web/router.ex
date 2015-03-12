@@ -31,9 +31,9 @@ defmodule Charts.Router do
   end
 
 
-  scope "/:username", Charts do
+  scope "/:user_id", Charts do
     pipe_through :browser # Use the default browser stack
-
+    get "/dashboard", UsersController, :dashboard
     resources "/charts/:type", ChartsController
   end
 
