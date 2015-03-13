@@ -5,7 +5,7 @@ defmodule Charts.BaseController do
       use Phoenix.Controller
       import Charts.Router.Helpers
       require IEx
-      
+
       plug :set_current_user
 
       def current_user(conn) do

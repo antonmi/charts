@@ -25,7 +25,7 @@ defmodule ChartsTest do
         ["2007",  1030,      540]
       ]
       {:ok, data} = Poison.encode(data)
-      HTTPoison.post("localhost:4000/api/charts/1/data", {:form, [data: data]})
+      HTTPoison.post("localhost:4000/api/charts/5/data", {:form, [data: data]})
     end
   end
 end

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-1">
+    <h1>Your Charts</h1>
+    <a class="btn btn-default" href="<%= new_path(@conn) %>">New Chart</a>
+    <table class="table table-striped">
+      <thead>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <%= for chart <- @charts do %>
+        <tr>
+          <td><%= chart.id %></td>
+          <td><%= chart.title %></td>
+          <td><%= chart.type %></td>
+          <td>
+            <form action="<%= delete_path(@conn, chart.id)%>" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <a class="btn btn-xs btn-info" href="<%= show_path(@conn, chart.id)%>">Show</a>
+              <a class="btn btn-xs btn-warning" href="<%= edit_path(@conn, chart.id)%>">Edit</a>
+              <button type="submit" name="confirm-button" class="btn btn-xs btn-danger" data-text="Are you sure?">Danger</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <a class="btn btn-default" href="<%= new_path(@conn) %>">New Chart</a>
+  </div>
+</div>

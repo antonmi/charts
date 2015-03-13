@@ -23,7 +23,7 @@
     }]
   }"></script>
 
-  <title>Hello Phoenix!</title>
+  <title>Charts</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -38,14 +38,27 @@
   <div class="container">
 
     <div class="masthead">
-      <h3 class="text-muted">Project name</h3>
+      <%= if current_user(@conn) do %>
+      <h3 class="text-muted"><%= current_user(@conn).username %></h3>
+      <% else %>
+      <h3 class="text-muted">Live Charts</h3>
+      <% end %>
       <nav>
         <ul class="nav nav-justified">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Downloads</a></li>
+          <% IO.puts(inspect @conn.path_info) %>
+          <%= if current_user(@conn) do %>
+          <li class="<%= if menu_item(@conn.path_info) == :dashboard, do: "active" %>">
+            <a href="<%= users_path(@conn, :dashboard, current_user(@conn).id) %>">Dashboard</a>
+          </li>
+          <li class="<%= if menu_item(@conn.path_info) == :charts, do: "active" %>">
+            <a href="<%= charts_path(@conn, :index, current_user(@conn).id) %>">Charts</a>
+          </li>
+          <li class="<%= if menu_item(@conn.path_info) == :settings, do: "active" %>">
+            <a href="<%= users_path(@conn, :settings, current_user(@conn).id) %>">Settings</a>
+          </li>
+          <% else %>
           <li><a href="#">About</a></li>
+          <% end %>
           <li>
             <% current_user = current_user(@conn) %>
             <%= if current_user do %>
@@ -83,5 +96,7 @@
     </footer>
 
   </div> <!-- /container -->
+  <%= render(__MODULE__, "inline_script.html", %{}) %>
+
 </body>
 </html>

@@ -27,13 +27,15 @@ defmodule Charts.Router do
     pipe_through :api
 
     get "/charts/:id", API.ChartsController, :show
-    post "/charts/:id/data", API.ChartsController, :data
+    post "/charts/:id/data/:token", API.ChartsController, :data
   end
 
 
   scope "/:user_id", Charts do
     pipe_through :browser # Use the default browser stack
     get "/dashboard", UsersController, :dashboard
+    get "/settings", UsersController, :settings
+    patch "/token", UsersController, :token
     resources "/charts", ChartsController
   end
 

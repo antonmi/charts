@@ -1,0 +1,10 @@
+<script type="text/javascript">
+$('button[name="confirm-button"]').on('click', function(e){
+  var text = $(this).attr("data-text")
+  var $form=$(this).closest('form');
+  e.preventDefault();
+  if (confirm(text)) {
+    $form.trigger('submit'); // submit the form
+  }
+});
+</script>

@@ -10,6 +10,7 @@ defmodule Charts.View do
       require IEx
       # Use Phoenix.HTML to import all HTML functions (forms, tags, etc)
       use Phoenix.HTML
+
     end
   end
 
@@ -21,4 +22,6 @@ defmodule Charts.View do
   def current_user(conn) do
     Charts.UsersController.current_user(conn)
   end
+
+
 end

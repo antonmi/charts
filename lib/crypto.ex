@@ -6,4 +6,9 @@ defmodule Charts.Crypto do
       |> List.flatten
       |> :erlang.list_to_bitstring
   end
+
+  def rand() do
+    {mega, sec, micro} = :os.timestamp()
+    Integer.to_string(mega + sec + micro) |> md5
+  end
 end

@@ -8,8 +8,18 @@ defmodule Charts.UsersController do
     render conn, "dashboard.html"
   end
 
+  def settings(conn, _params) do
+    render conn, "settings.html"
+  end
+
+  def token(conn, _params) do
+    Charts.UserRepo.set_token(current_user(conn))
+    conn |> put_flash(:notice, "A new token has been generated!")
+    |> redirect to: users_path(conn, :settings, current_user(conn).id)
+  end
+
   def new(conn, _params) do
-    render conn, "new.html", changeset: %Ecto.Changeset{}
+    render conn, "new.html", changeset: %Ecto.Changeset{model: %Charts.User{}}
   end
 
   def create(conn, params) do
@@ -46,4 +56,5 @@ defmodule Charts.UsersController do
     |> put_flash(:notice, "Successfully logged out!")
     |> redirect to: page_path(conn, :index)
   end
+
 end

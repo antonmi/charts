@@ -13,6 +13,11 @@ defmodule Charts.UserRepo do
     Charts.Repo.update(user)
   end
 
+  def set_token(user) do
+    user = %Charts.User{user | token: Charts.Crypto.rand() }
+    Charts.Repo.update(user)
+  end
+
   def find_by_username(name) do
     query = from u in Charts.User, where: u.username == ^name, select: u
     Charts.Repo.all(query) |> List.first

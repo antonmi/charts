@@ -1,0 +1,37 @@
+
+<% action = if persist?(@changeset), do: update_path(@conn, @changeset.model.id), else: create_path(@conn) %>
+<% method = if persist?(@changeset), do: "patch", else: "post" %>
+
+<form class="form-horizontal" action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <div class="form-group <%= if has_error?(@changeset, :username), do: "has-error" %>">
+    <label for="titleInput" class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-10 <%= if has_error?(@changeset, :title), do: "has-error" %>">
+      <input class="form-control" name="title" value="<%= @changeset.model.title %>" placeholder="Title" id="titleInput">
+    </div>
+  </div>
+  <div class="form-group <%= if has_error?(@changeset, :password), do: "has-error" %>">
+    <label for="typeSelect" class="col-sm-2 control-label">Type</label>
+
+    <div class="col-sm-10 <%= if has_error?(@changeset, :type), do: "has-error" %>">
+      <select class="form-control" name="type" id="typeSelect" >
+        <option>Select Type</option>
+        <%= for type <- Charts.Chart.types() do %>
+          <% {value, text} = type %>
+          <%= if Atom.to_string(value) == @changeset.model.type do %>
+          <option selected value=<%= value %>><%= text %></option>
+          <% else %>
+          <option value=<%= value %>><%= text %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default"><%= button_text(@changeset) %></button>
+    </div>
+  </div>
+</form>
