@@ -23,6 +23,11 @@ defmodule Charts.UserRepo do
     Charts.Repo.all(query) |> List.first
   end
 
+  def find_by_token(token) do
+    query = from u in Charts.User, where: u.token == ^token, select: u
+    Charts.Repo.all(query) |> List.first
+  end
+
   def exist?(username) do
     if find_by_username(username), do: true, else: false
   end

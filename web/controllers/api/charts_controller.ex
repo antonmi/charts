@@ -18,10 +18,15 @@ defmodule Charts.API.ChartsController do
 
   def data(conn, params) do
     chart = Charts.ChartRepo.find(params["id"])
-    chart = %{chart | data: params["data"]}
-    Charts.Repo.update(chart)
-    Phoenix.Channel.broadcast_from(Charts.PubSub, self, "data:source", "update", %{})
-    json conn, %{}
+    user = Charts.UserRepo.find_by_token(params["token"])
+    if (chart && user) && chart.user_id == user.id do
+      chart = %{chart | data: params["data"]}
+      Charts.Repo.update(chart)
+      Phoenix.Channel.broadcast_from(Charts.PubSub, self, "data:source", "update", %{})
+      json conn, %{}
+    else
+      conn |> put_status(404) |> json(%{})
+    end
   end
 
 end

@@ -16,16 +16,19 @@ defmodule ChartsTest do
   # end
 
   test "with data" do
+    token = "51b134cb7c1ccb20464eaa1c0b67a3a8"
+
     (1..1000) |> Enum.each fn(i) ->
       data =   [
         ["Year", "Sales", "Expenses"],
         ["2004",  2000,      1400],
-        ["2005",  1170,      460+10],
+        ["2005",  1170,      460+10*i],
         ["2006",  1660,       1120],
         ["2007",  1030,      540]
       ]
       {:ok, data} = Poison.encode(data)
-      HTTPoison.post("localhost:4000/api/charts/5/data", {:form, [data: data]})
+      :timer.sleep(100)
+      HTTPoison.post("localhost:4000/api/charts/5/data/#{token}", {:form, [data: data]})
     end
   end
 end
