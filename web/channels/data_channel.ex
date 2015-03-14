@@ -3,11 +3,15 @@ defmodule Charts.DataChannel do
 
   require IEx
 
-  def join("data:source", _message, socket) do
-    IO.puts "JOIN"
-    IO.puts(inspect socket)
-    reply socket, "join", %{ hey: "Hello!" }
-    {:ok, socket}
+  def join(channel, _message, socket) do
+    token = String.split(channel, ":") |> List.last
+    user = Charts.UserRepo.find_by_token(token)
+    if user do
+      reply socket, "join", %{ hey: "Hello!" }
+      {:ok, socket}
+    else
+      {:error, :access_denied, socket}
+    end
   end
 
   def leave(reason, socket) do

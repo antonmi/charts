@@ -11,7 +11,8 @@ defmodule Charts do
       supervisor(Charts.Endpoint, []),
       # Here you could define other workers and supervisors as children
       # worker(Charts.Worker, [arg1, arg2, arg3]),
-      worker(Charts.Repo, [])
+      worker(Charts.Repo, []),
+      worker(Charts.RepoCache, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

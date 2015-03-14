@@ -33,6 +33,7 @@
 
       this.$chart_div = $("#" + this.chart_div_id);
       url = this.$chart_div.attr('data-url');
+      this.token = this.$chart_div.attr('data-token');
       this.api_client = new window.APIClient(url);
       this.ws_client = new window.WSClient(this);
       this.init();
@@ -97,7 +98,7 @@
 
     WSClient.prototype.init = function() {
       var _this = this;
-      return this.socket.join("data:source", {}, function(channel) {
+      return this.socket.join("data:" + this.chart.token, {}, function(channel) {
         window.chan = channel;
         channel.on("join", function(message) {
           console.log("joined");

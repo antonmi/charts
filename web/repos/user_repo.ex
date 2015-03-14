@@ -28,6 +28,15 @@ defmodule Charts.UserRepo do
     Charts.Repo.all(query) |> List.first
   end
 
+  def find_with_cache_by_token(token) do
+    user = Charts.RepoCache.get(__MODULE__, token)
+    unless user do
+      user = find_by_token(token)
+      Charts.RepoCache.set(__MODULE__, token, user)
+    end
+    user
+  end
+
   def exist?(username) do
     if find_by_username(username), do: true, else: false
   end

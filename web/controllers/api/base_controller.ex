@@ -4,7 +4,7 @@ defmodule Charts.API.BaseController do
     quote do
       use Phoenix.Controller
       require IEx
-      plug :action
+      
 
     end
   end

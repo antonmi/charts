@@ -20,7 +20,7 @@
               <input type="hidden" name="_method" value="delete">
               <a class="btn btn-xs btn-info" href="<%= show_path(@conn, chart.id)%>">Show</a>
               <a class="btn btn-xs btn-warning" href="<%= edit_path(@conn, chart.id)%>">Edit</a>
-              <button type="submit" name="confirm-button" class="btn btn-xs btn-danger" data-text="Are you sure?">Danger</button>
+              <button type="submit" name="confirm-button" class="btn btn-xs btn-danger" data-text="Are you sure?">Delete</button>
             </form>
           </td>
         </tr>

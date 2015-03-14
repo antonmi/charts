@@ -33,5 +33,9 @@ defmodule Charts.ChartsView do
     if persist?(changeset), do: "Update", else: "Create"
   end
 
+  def data_url(conn, id) do
+    "http://#{conn.host}:#{conn.port}/api/charts/#{id}/data/#{current_user(conn).token}"
+  end
+
 
 end

@@ -5,7 +5,7 @@ class window.WSClient
     @init()
 
   init: ->
-    @socket.join "data:source", {}, (channel) =>
+    @socket.join "data:#{@chart.token}", {}, (channel) =>
       window.chan = channel
 
       channel.on "join", (message) ->

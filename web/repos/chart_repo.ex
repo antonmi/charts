@@ -16,5 +16,13 @@ defmodule Charts.ChartRepo do
     Charts.Repo.all(query) |> List.first
   end
 
+  def find_with_cache(id) do
+    chart = Charts.RepoCache.get(__MODULE__, id)
+    unless chart do
+      chart = find(id)
+      Charts.RepoCache.set(__MODULE__, id, chart)
+    end
+    chart
+  end
 
 end

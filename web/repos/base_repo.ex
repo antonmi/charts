@@ -7,7 +7,7 @@ defmodule Charts.BaseRepo do
 
       #common methods here
       def find(id), do: Repo.get(module, id)
-
+      
       def all(), do: Repo.all(from m in module, select: m)
       def all(query), do: Repo.all(query)
 

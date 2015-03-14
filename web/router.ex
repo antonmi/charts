@@ -26,7 +26,7 @@ defmodule Charts.Router do
   scope "/api", Charts, as: :api do
     pipe_through :api
 
-    get "/charts/:id", API.ChartsController, :show
+    get "/charts/:id/:token", API.ChartsController, :show
     post "/charts/:id/data/:token", API.ChartsController, :data
   end
 
