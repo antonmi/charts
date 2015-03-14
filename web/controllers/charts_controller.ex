@@ -3,17 +3,18 @@ defmodule Charts.ChartsController do
 
   @chart_type "line_chart"
 
-  plug :auth
+  plug :authenticate
+  plug :authorize
+  plug :find_chart
   plug :action
 
   def index(conn, params) do
-    charts = Charts.ChartRepo.all
+    charts = Charts.ChartRepo.all_for_user(current_user(conn))
     render conn, "index.html", charts: charts
   end
 
   def show(conn, params) do
-    chart = Charts.ChartRepo.find(params["id"])
-    render conn, "show.html", chart: chart
+    render conn, "show.html", chart: chart(conn)
   end
 
   def new(conn, params) do
@@ -21,15 +22,13 @@ defmodule Charts.ChartsController do
   end
 
   def edit(conn, params) do
-    chart = Charts.ChartRepo.find(params["id"])
-    render conn, "edit.html", changeset: %Ecto.Changeset{changes: %{}, model: chart}
+    render conn, "edit.html", changeset: %Ecto.Changeset{changes: %{}, model: chart(conn)}
   end
 
   def update(conn, params) do
-    chart = Charts.ChartRepo.find(params["id"])
-    changeset  = Charts.Chart.changeset(chart, params)
+    changeset  = Charts.Chart.changeset(chart(conn), params)
     if changeset.valid? do
-      chart = Charts.ChartRepo.update(chart)
+      chart = Charts.Repo.update(chart(conn))
       conn |> put_flash(:notice, "Chart updated!")
       |> redirect to: charts_path(conn, :show, current_user(conn).id, chart.id)
     else
@@ -52,10 +51,32 @@ defmodule Charts.ChartsController do
   end
 
   def delete(conn, params) do
-    chart = Charts.ChartRepo.find(params["id"])
-    Charts.Repo.delete(chart)
-    conn |> put_flash(:notice, "The chart '#{chart.title}' has been deleted!")
+    Charts.Repo.delete(chart(conn))
+    conn |> put_flash(:notice, "The chart '#{chart(conn).title}' has been deleted!")
     |> redirect to: charts_path(@conn, :index, current_user(conn).id)
+  end
+
+  defp find_chart(conn, opts) do
+    if conn.params["id"] do
+      chart = Charts.ChartRepo.for_user(current_user(conn), conn.params["id"])
+      assign(conn, :chart, chart)
+    else
+      conn
+    end
+  end
+
+  defp chart(conn), do: conn.assigns[:chart]
+
+  defp authorize(conn, opts) do
+    user_id = String.to_integer(conn.params["user_id"])
+    current_user = current_user(conn)
+    if current_user && current_user.id == user_id do
+      conn
+    else
+      Unauthorized
+      conn |> put_status(401)
+      |> text "401 Unauthorized"
+    end
   end
 
 

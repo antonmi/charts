@@ -59,12 +59,16 @@
           <% else %>
           <li><a href="#">About</a></li>
           <% end %>
-          <li>
             <% current_user = current_user(@conn) %>
             <%= if current_user do %>
-            <a href="<%= users_path @conn, :logout, current_user.id %>">Logout</a>
+            <li><a href="<%= users_path @conn, :logout, current_user.id %>">Logout</a></li>
             <% else %>
-            <a href="<%= users_path @conn, :login %>">Login</a>
+            <li class="<%= if menu_item(@conn.path_info) == :log_in, do: "active" %>">
+              <a href="<%= users_path @conn, :login %>">Log in</a>
+            </li>
+            <li class="<%= if menu_item(@conn.path_info) == :sign_up, do: "active" %>">
+              <a href="<%= users_path @conn, :new %>">Sign up</a>
+            </li>
             <% end %>
           </li>
         </ul>

@@ -1,10 +1,13 @@
-<div class="jumbotron">
-  <!-- <h1>Marketing stuff!</h1> -->
+<div class="row">
+  <div class="col-lg-8">
+    <h1><%= @chart.title %></h1>
+  </div>
+</div>
 
-  <h1>Hey</h1>
-  <div id="chart-div" data-url="/api/charts/<%= @chart.id %>"></div>
-  <!-- <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p> -->
-  <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-1">
+    <div id="chart-div" data-url="/api/charts/<%= @chart.id %>"></div>
+  </div>
 </div>
 
 <!-- Example row of columns -->

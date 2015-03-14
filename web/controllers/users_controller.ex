@@ -1,7 +1,7 @@
 defmodule Charts.UsersController do
   use Charts.BaseController
 
-  plug :auth when action in [:dashboard]
+  plug :authenticate when action in [:dashboard, :settigs, :token, :edit, :update]
   plug :action
 
   def dashboard(conn, _params) do
@@ -26,6 +26,7 @@ defmodule Charts.UsersController do
     changeset  = Charts.User.changeset(%Charts.User{}, params)
     if changeset.valid? do
       user = Charts.UserRepo.create(params["username"], params["password"])
+      Charts.UserRepo.set_token(user)
       conn |> put_session(:user_id, user.id)
       |> redirect to: users_path(conn, :dashboard, user.id)
     else

@@ -10,7 +10,7 @@ defmodule Charts.Chart do
   schema "charts" do
     field :type, :string
     field :user_id, :integer
-    field :data, :binary
+    field :data, :binary, default: "{}"
     field :title, :string
   end
 
