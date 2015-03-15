@@ -14,7 +14,7 @@ defmodule Charts.Router do
 
   scope "/", Charts do
     pipe_through :browser # Use the default browser stack
-
+    get "/", PageController, :index
     get "/test", PageController, :test
     resources "/users", UsersController, only: [:new, :create]
     get "/users/login", UsersController, :login
