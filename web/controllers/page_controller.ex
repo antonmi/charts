@@ -3,7 +3,7 @@ defmodule Charts.PageController do
 
   plug :action
 
-  def index(conn, _params) do
-    render conn, "index.html"
+  def test(conn, _params) do
+    text conn, "Hello"
   end
 end

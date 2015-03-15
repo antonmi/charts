@@ -25,4 +25,9 @@ defmodule Charts.ChartRepo do
     chart
   end
 
+  def update_with_cache(chart) do
+    Charts.RepoCache.set(__MODULE__, chart.id, chart)
+    Charts.Repo.update(chart)
+  end
+
 end

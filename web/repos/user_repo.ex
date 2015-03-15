@@ -14,6 +14,7 @@ defmodule Charts.UserRepo do
   end
 
   def set_token(user) do
+    Charts.RepoCache.del(__MODULE__, user.token)
     user = %Charts.User{user | token: Charts.Crypto.rand() }
     Charts.Repo.update(user)
   end

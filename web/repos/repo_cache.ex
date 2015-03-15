@@ -9,7 +9,7 @@ defmodule Charts.RepoCache do
     Process.register(pid, __MODULE__)
     {ok, pid}
   end
-
+  
   def set(repo, key, value) do
     GenServer.call(__MODULE__, {:set, repo, key, value})
   end
