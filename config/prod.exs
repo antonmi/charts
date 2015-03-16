@@ -35,9 +35,9 @@ config :logger, level: :info
 #
 #     config :charts, Charts.Endpoint, server: true
 #
-
-use Mix.Config
-
+#
 config :charts, Charts.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL")
+
+# import_config "database.exs"
