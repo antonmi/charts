@@ -4,8 +4,9 @@ class window.BaseChart
     @$chart_div = $("##{@chart_div_id}")
     url = @$chart_div.attr('data-url')
     @token = @$chart_div.attr('data-token')
+    ws_protocol = @$chart_div.attr('data-ws-protocol')
     @api_client = new window.APIClient(url)
-    @ws_client = new window.WSClient(@)
+    @ws_client = new window.WSClient(@, ws_protocol)
     @init()
     @update()
 

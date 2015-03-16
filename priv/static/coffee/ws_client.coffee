@@ -1,6 +1,6 @@
 class window.WSClient
-  constructor: (@chart) ->
-    url = "wss://" + location.host +  "/ws"
+  constructor: (@chart, protocol) ->
+    url = "#{protocol}://" + location.host +  "/ws"
     @socket = new Phoenix.Socket(url);
     @init()
 

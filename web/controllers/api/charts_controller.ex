@@ -30,4 +30,8 @@ defmodule Charts.API.ChartsController do
 
   defp user(conn), do: conn.assigns[:user]
 
+  def protocol do
+    if System.get_env("MIX_ENV") == "prod", do: "wss", else: "ws"
+  end
+
 end

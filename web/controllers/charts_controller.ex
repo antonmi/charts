@@ -14,7 +14,7 @@ defmodule Charts.ChartsController do
   end
 
   def show(conn, _params) do
-    render conn, "show.html", chart: chart(conn)
+    render conn, "show.html", chart: chart(conn), ws_protocol: Charts.API.ChartsController.protocol
   end
 
   def new(conn, _params) do

@@ -27,15 +27,16 @@
   window.BaseChart = (function() {
 
     function BaseChart(chart_div_id) {
-      var url;
+      var url, ws_protocol;
       this.chart_div_id = chart_div_id;
       this.draw_chart = __bind(this.draw_chart, this);
 
       this.$chart_div = $("#" + this.chart_div_id);
       url = this.$chart_div.attr('data-url');
       this.token = this.$chart_div.attr('data-token');
+      ws_protocol = this.$chart_div.attr('data-ws-protocol');
       this.api_client = new window.APIClient(url);
-      this.ws_client = new window.WSClient(this);
+      this.ws_client = new window.WSClient(this, ws_protocol);
       this.init();
       this.update();
     }
@@ -88,10 +89,10 @@
 
   window.WSClient = (function() {
 
-    function WSClient(chart) {
+    function WSClient(chart, protocol) {
       var url;
       this.chart = chart;
-      url = "wss://" + location.host + "/ws";
+      url = ("" + protocol + "://") + location.host + "/ws";
       this.socket = new Phoenix.Socket(url);
       this.init();
     }
