@@ -52,7 +52,6 @@ defmodule Charts.UsersController do
   end
 
   def logout(conn, _params) do
-    user = current_user(conn)
     conn |> put_session(:user_id, nil)
     |> put_flash(:notice, "Successfully logged out!")
     |> redirect to: page_path(conn, :index)

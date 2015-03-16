@@ -8,20 +8,20 @@ defmodule Charts.ChartsController do
   plug :find_chart
   plug :action
 
-  def index(conn, params) do
+  def index(conn, _params) do
     charts = Charts.ChartRepo.all_for_user(current_user(conn))
     render conn, "index.html", charts: charts
   end
 
-  def show(conn, params) do
+  def show(conn, _params) do
     render conn, "show.html", chart: chart(conn)
   end
 
-  def new(conn, params) do
+  def new(conn, _params) do
     render conn, "new.html", changeset: %Ecto.Changeset{changes: %{}, model: %Charts.Chart{}}
   end
 
-  def edit(conn, params) do
+  def edit(conn, _params) do
     render conn, "edit.html", changeset: %Ecto.Changeset{changes: %{}, model: chart(conn)}
   end
 
@@ -50,13 +50,13 @@ defmodule Charts.ChartsController do
     end
   end
 
-  def delete(conn, params) do
+  def delete(conn, _params) do
     Charts.Repo.delete(chart(conn))
     conn |> put_flash(:notice, "The chart '#{chart(conn).title}' has been deleted!")
-    |> redirect to: charts_path(@conn, :index, current_user(conn).id)
+    |> redirect to: charts_path(conn, :index, current_user(conn).id)
   end
 
-  defp find_chart(conn, opts) do
+  defp find_chart(conn, _opts) do
     if conn.params["id"] do
       chart = Charts.ChartRepo.for_user(current_user(conn), conn.params["id"])
       assign(conn, :chart, chart)
@@ -67,7 +67,7 @@ defmodule Charts.ChartsController do
 
   defp chart(conn), do: conn.assigns[:chart]
 
-  defp authorize(conn, opts) do
+  defp authorize(conn, _opts) do
     user_id = String.to_integer(conn.params["user_id"])
     current_user = current_user(conn)
     if current_user && current_user.id == user_id do
