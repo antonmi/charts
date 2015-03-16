@@ -4,7 +4,7 @@ config :charts, Charts.Endpoint,
   url: [host: "example.com"],
   http: [port: System.get_env("PORT")],
   secret_key_base: "DLcWxJfWlmFdUwSBB34mCKcUuux7PDRj7BnhO0p52Kb1XTAAfkuhiZjp5lLwMjPW"
-  
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
@@ -18,7 +18,7 @@ config :charts, Charts.Endpoint,
 #
 # Where those two env variables point to a file on
 # disk for the key and cert.
-  
+
 
 # Do not pring debug messages in production
 config :logger, level: :info
@@ -35,3 +35,9 @@ config :logger, level: :info
 #
 #     config :charts, Charts.Endpoint, server: true
 #
+
+use Mix.Config
+
+config :charts, Charts.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL")
