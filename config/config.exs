@@ -23,7 +23,7 @@ config :logger, :console,
 #   database: "charts_dev",
 #   username: "postgres",
 #   password: "123456"
-import_config "database.exs"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
