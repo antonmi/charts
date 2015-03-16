@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :charts, Charts.Endpoint,
-  url: [host: "example.com"],
+  url: [host: "localhost"],
   http: [port: System.get_env("PORT")],
   secret_key_base: "DLcWxJfWlmFdUwSBB34mCKcUuux7PDRj7BnhO0p52Kb1XTAAfkuhiZjp5lLwMjPW"
 

@@ -5,11 +5,9 @@
 # is restricted to this project.
 use Mix.Config
 
-IO.puts System.get_env("PORT")
 # Configures the endpoint
 config :charts, Charts.Endpoint,
   url: [host: "localhost"],
-  port: System.get_env("PORT") || 4000,
   secret_key_base: "DLcWxJfWlmFdUwSBB34mCKcUuux7PDRj7BnhO0p52Kb1XTAAfkuhiZjp5lLwMjPW",
   debug_errors: false,
   pubsub: [adapter: Phoenix.PubSub.PG2]
