@@ -25,7 +25,8 @@ defmodule ChartsTest do
     end
   end
 
-  defp url, do: "http://localhost:4000/api/charts/2/data/2c578e2c471e3ccae7056de9f87653da"
+  # defp url, do: "http://localhost:4000/api/charts/2/data/2c578e2c471e3ccae7056de9f87653da"
+  defp url, do: "http://live-charts.herokuapp.com:80/api/charts/1/data/9f6c6935b9a4e45b43c7ed0b7e9a15ba"
 
   defp data(i) do
     [

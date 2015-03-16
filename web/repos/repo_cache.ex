@@ -9,7 +9,7 @@ defmodule Charts.RepoCache do
     Process.register(pid, __MODULE__)
     {ok, pid}
   end
-  
+
   def set(repo, key, value) do
     GenServer.call(__MODULE__, {:set, repo, key, value})
   end
@@ -53,7 +53,7 @@ defmodule Charts.RepoCache do
     {:reply, state, state}
   end
 
-  def handle_call(:clear, _from, state) do
+  def handle_call(:clear, _from, _state) do
     {:reply, :ok, @init_state}
   end
 

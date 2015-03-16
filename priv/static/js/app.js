@@ -91,7 +91,7 @@
     function WSClient(chart) {
       var url;
       this.chart = chart;
-      url = "ws://" + location.host + "/ws";
+      url = "wss://" + location.host + "/ws";
       this.socket = new Phoenix.Socket(url);
       this.init();
     }
