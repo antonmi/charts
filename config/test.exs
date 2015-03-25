@@ -6,4 +6,4 @@ config :charts, Charts.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-import_config "database.exs"
+import_config "database_test.exs"

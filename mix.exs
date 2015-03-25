@@ -7,6 +7,7 @@ defmodule Charts.Mixfile do
      elixir: "~> 1.0",
      elixirc_paths: ["lib", "web"],
      compilers: [:phoenix] ++ Mix.compilers,
+     preferred_cli_env: [espec: :test],
      deps: deps]
   end
 
@@ -15,7 +16,7 @@ defmodule Charts.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Charts, []},
-     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto, :httpoison]]
+     applications: [:espec, :phoenix, :cowboy, :logger, :postgrex, :ecto, :httpoison]]
   end
 
   # Specifies your project dependencies
@@ -26,6 +27,7 @@ defmodule Charts.Mixfile do
      {:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.6"},
      {:postgrex, ">= 0.0.0"},
-     {:ecto, "~> 0.9.0"}]
+     {:espec, github: "antonmi/espec"},
+     {:ecto, github: "elixir-lang/ecto"}]
   end
 end
