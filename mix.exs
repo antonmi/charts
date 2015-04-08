@@ -27,7 +27,8 @@ defmodule Charts.Mixfile do
      {:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.6"},
      {:postgrex, ">= 0.0.0"},
-     {:espec, github: "antonmi/espec"},
+     {:espec, "~> 0.4.0", only: :test},
+     # {:espec, github: "antonmi/espec", only: :test},
      {:ecto, github: "elixir-lang/ecto"}]
   end
 end
